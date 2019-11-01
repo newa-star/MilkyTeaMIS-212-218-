@@ -55,6 +55,10 @@ public class OrderActivity extends Activity  implements View.OnClickListener, Ad
         //暂时删去
         //listView.setOnClickListener(this);
     }
+    //获取商品列表
+    public void getGoodsList(){
+
+    }
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
