@@ -12,6 +12,18 @@ public class User {
     //用户身份
     private int identity;
 
+    public User(int id, String code, String name, String password, int identity) {
+        this.id = id;
+        this.code = code;
+        this.name = name;
+        this.password = password;
+        this.identity = identity;
+    }
+
+    public User(){
+        this(0,"","","",0);
+    }
+
     public int getId() {
         return id;
     }

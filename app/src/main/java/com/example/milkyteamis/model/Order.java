@@ -1,14 +1,29 @@
 package com.example.milkyteamis.model;
 
+//该表为订单商品表
 public class Order {
     //标识订单id
     private int id;
-    //标识订单状态
-    private int state;
-    //订单总价格
-    private double total_price;
     //订单经手人
     private int user_id;
+    //商品名称
+    private String goodName;
+    //数量
+    private int soldNum;
+    //订单总价格
+    private double soldPrice;
+
+    public Order(int id, int user_id, String goodName, int soldNum, double soldPrice) {
+        this.id = id;
+        this.user_id = user_id;
+        this.goodName = goodName;
+        this.soldNum = soldNum;
+        this.soldPrice = soldPrice;
+    }
+
+    public Order(){
+        this(0,0,"",0,0);
+    }
 
     public int getId() {
         return id;
@@ -18,27 +33,28 @@ public class Order {
         this.id = id;
     }
 
-    public int getState() {
-        return state;
+
+    public double getSoldPrice() {
+        return soldPrice;
     }
 
-    public void setState(int state) {
-        this.state = state;
+    public void setSoldPrice(double soldPrice) {
+        this.soldPrice = soldPrice;
     }
 
-    public double getTotal_price() {
-        return total_price;
+    public String getGoodName() {
+        return goodName;
     }
 
-    public void setTotal_price(double total_price) {
-        this.total_price = total_price;
+    public void setGoodName(String goodName) {
+        this.goodName = goodName;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public int getSoldNum() {
+        return soldNum;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setSoldNum(int soldNum) {
+        this.soldNum = soldNum;
     }
 }

@@ -8,10 +8,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
+import com.example.milkyteamis.activity.BaseActivity;
 import com.example.milkyteamis.activity.OrderActivity;
 import com.example.milkyteamis.model.Order;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     //启动从登陆界面开始
 
@@ -19,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_usermenu);
-        setToolbarAndTitle("菜单");
+        super.setToolbarAndTitle("菜单",true);
         ImageView iv = findViewById(R.id.imageView9);
         iv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -30,7 +31,5 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    protected void setToolbarAndTitle(CharSequence title) {
-        ((TextView) findViewById(R.id.tv_toolbar_title)).setText(title);
-    }
+
 }

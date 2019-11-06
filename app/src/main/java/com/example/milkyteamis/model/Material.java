@@ -8,6 +8,16 @@ public class Material {
     //原料库存
     private int storage;
 
+    public Material(int id, String name, int storage) {
+        this.id = id;
+        this.name = name;
+        this.storage = storage;
+    }
+
+    public Material(){
+        this(0,"",0);
+    }
+
     public int getId() {
         return id;
     }

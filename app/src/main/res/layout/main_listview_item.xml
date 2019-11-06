@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="80dp"
     android:background="#ffffff"
+    android:id="@+id/order_detail_layout"
     android:orientation="horizontal" >
 
     <LinearLayout
