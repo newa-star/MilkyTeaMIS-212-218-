@@ -14,6 +14,7 @@ import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +29,7 @@ import com.example.milkyteamis.server.ServerAddress;
 import com.example.milkyteamis.view.MyGridView;
 import com.example.milkyteamis.view.MyListView;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
@@ -35,6 +37,9 @@ import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
+
+import org.apache.http.entity.StringEntity;
+import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -68,7 +73,7 @@ public class OrderActivity extends BaseActivity  implements View.OnClickListener
 
     Toolbar toolbar;
 
-    //private LinearLayout order_detail_layout = (LinearLayout)findViewById(R.id.order_detail_layout);
+    private LinearLayout order_detail_layout;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -76,13 +81,14 @@ public class OrderActivity extends BaseActivity  implements View.OnClickListener
         //this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_order);
         super.setToolbarAndTitle("收银",true);
-        initGridView();
         getGoodsList();
+        initGridView();
     }
 
     //初始化这个页面的控件
     private void initView(){
-        //order_detail_layout.setOnClickListener(this);
+        order_detail_layout = findViewById(R.id.order_detail_layout);
+        order_detail_layout.setOnClickListener(this);
         toolbar = findViewById(R.id.toolbar);
     }
 
@@ -90,7 +96,7 @@ public class OrderActivity extends BaseActivity  implements View.OnClickListener
     private void initGridView(){
         gridView = (MyGridView)findViewById(R.id.mainuser_gridview_menu);
         gridView.setAdapter(new OrderGridViewAdapter(this));
-        //gridView.setOnClickListener(this);
+        gridView.setOnItemClickListener(this);
     }
 
     //初始化商品列表
@@ -99,7 +105,7 @@ public class OrderActivity extends BaseActivity  implements View.OnClickListener
         adapter = new OrderListViewAdapter(OrderActivity.this,goodlist);
         listView.setAdapter(adapter);
         //暂时删去
-        //listView.setOnClickListener(this);
+        listView.setOnItemClickListener(this);
     }
     //获取商品列表
     public void getGoodsList(){
@@ -129,7 +135,43 @@ public class OrderActivity extends BaseActivity  implements View.OnClickListener
     //根据商品类别获取商品
     public void getGoodListByType(int classification){
         RequestParams paras = new RequestParams();
-        //paras.addBodyParameter("classify","");
+        JsonObject json = new JsonObject();
+        try {
+            json.addProperty("classify", Integer.toString(classification));
+            Gson gson3 = new Gson();
+            paras.setBodyEntity(new StringEntity(gson3.toJson(json),"UTF-8"));
+            paras.setContentType("application/json");
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        HttpUtils http = new HttpUtils();
+        http.send(HttpRequest.HttpMethod.POST, ServerAddress.SERVER_ADDRESS + ServerAddress.FIND_GOOD_BY_CLASSIFY, paras, new RequestCallBack<String>() {
+            @Override
+            public void onSuccess(ResponseInfo<String> responseInfo) {
+                Log.i("TAG","----"+responseInfo.result);
+                Gson gson = new Gson();
+                Type type = new TypeToken<ArrayList<Good>>(){}.getType();
+                ResultBean resultBean = gson.fromJson(responseInfo.result,ResultBean.class);
+                goodlist = resultBean.getData();
+                if(goodlist.size() == 0){
+                    Toast.makeText(OrderActivity.this,"该分类商品暂时无货",Toast.LENGTH_SHORT);
+
+                }
+                else {
+                    initListView();
+                    Toast.makeText(OrderActivity.this,"已成功显示该类别商品",Toast.LENGTH_SHORT);
+                }
+
+            }
+
+            @Override
+            public void onFailure(HttpException e, String s) {
+                System.out.println(s);
+
+                Toast.makeText(OrderActivity.this,"网络错误",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -153,6 +195,8 @@ public class OrderActivity extends BaseActivity  implements View.OnClickListener
                     getGoodListByType(3);
                 }
                 break;
+            case  R.id.mainuser_listview_info:
+                showAlertDialog(goodlist.get(i));
         }
     }
 
@@ -165,11 +209,12 @@ public class OrderActivity extends BaseActivity  implements View.OnClickListener
         }
     }
 
+
     //通过alertdialog显示具体的商品
     public void showAlertDialog(final Good good){
         selectNum = 1;
         order_good = new Order();
-        orders = new Orders();
+        //orders = new Orders();
         AlertDialog.Builder builder = new AlertDialog.Builder(OrderActivity.this);
         View view = View.inflate(OrderActivity.this,R.layout.alertdialog_layout,null);
         TextView goodsName = view.findViewById(R.id.tv_alert_goodname);

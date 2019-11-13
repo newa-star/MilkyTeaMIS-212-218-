@@ -1,13 +1,19 @@
 package com.example.milkyteamis.activity;
 
+import android.graphics.Color;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.milkyteamis.R;
@@ -28,11 +34,12 @@ public class BaseActivity extends AppCompatActivity {
         tfRegular = Typeface.createFromAsset(getAssets(),"OpenSans-Regular.ttf");
         tfLight = Typeface.createFromAsset(getAssets(),"OpenSans-Light.ttf");
         mToolbar = (android.support.v7.widget.Toolbar)findViewById(R.id.toolbar);
-
-
+        initStatusTransparent();
         activityCollector.add(this);
 
     }
+
+
 
     /**
      * 设置toolbar
@@ -46,6 +53,7 @@ public class BaseActivity extends AppCompatActivity {
         if(isBack)
             displayHomeButton();
     }
+
 
     /**
      * 导航栏返回封装，一键设置activity带返回键
@@ -72,6 +80,32 @@ public class BaseActivity extends AppCompatActivity {
             finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void initStatusTransparent() {
+        // 为window设立半透明状态栏的标签
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            //兼容5.0及以上支持全透明
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
+        }
+
+        View v = findViewById(R.id.toolbar);
+        if (v != null) {
+            v.setPadding(0, getStatusBarHeight(), 0, 10);
+            v.requestLayout();
+        }
+    }
+
+    protected int getStatusBarHeight() {
+        int statusBarHeight = -1;
+        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            statusBarHeight = getResources().getDimensionPixelSize(resourceId);
+        }
+        return statusBarHeight;
     }
 
     @Override

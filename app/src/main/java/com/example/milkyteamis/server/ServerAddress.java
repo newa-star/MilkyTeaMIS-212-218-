@@ -22,4 +22,7 @@ public class ServerAddress {
 
     //根据用户id获取订单
     public static String FIND_ORDERINFO_BY_USERID = "findOrderInfoByUserId";
+
+    //根据分类id找到分类下所有商品
+    public static String FIND_GOOD_BY_CLASSIFY = "findGoodByClassify";
 }

@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:background="@mipmap/icon_yinliao"
         android:padding="50dp"
+        android:layout_marginTop="50dp"
         android:layout_marginBottom="50dp"
         />
 
