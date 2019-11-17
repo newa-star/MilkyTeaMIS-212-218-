@@ -30,9 +30,9 @@ public class Good {
         this.classfication = classfication;
     }
 
-   /*** public Good(){
-        this("",0,0,0,null,0);
-    }*/
+    public Good(){
+        this("",0,0,0,0);
+    }
 
     public String getName() {
         return name;

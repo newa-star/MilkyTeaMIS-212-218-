@@ -155,12 +155,12 @@ public class OrderActivity extends BaseActivity  implements View.OnClickListener
                 ResultBean resultBean = gson.fromJson(responseInfo.result,ResultBean.class);
                 goodlist = resultBean.getData();
                 if(goodlist.size() == 0){
-                    Toast.makeText(OrderActivity.this,"该分类商品暂时无货",Toast.LENGTH_SHORT);
+                    Toast.makeText(OrderActivity.this,"该分类商品暂时无货",Toast.LENGTH_SHORT).show();
 
                 }
                 else {
                     initListView();
-                    Toast.makeText(OrderActivity.this,"已成功显示该类别商品",Toast.LENGTH_SHORT);
+                    Toast.makeText(OrderActivity.this,"已成功显示该类别商品",Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -168,7 +168,6 @@ public class OrderActivity extends BaseActivity  implements View.OnClickListener
             @Override
             public void onFailure(HttpException e, String s) {
                 System.out.println(s);
-
                 Toast.makeText(OrderActivity.this,"网络错误",Toast.LENGTH_SHORT).show();
             }
         });

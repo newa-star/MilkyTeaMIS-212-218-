@@ -25,4 +25,10 @@ public class ServerAddress {
 
     //根据分类id找到分类下所有商品
     public static String FIND_GOOD_BY_CLASSIFY = "findGoodByClassify";
+
+    //新增商品
+    public static String ADD_GOOD = "addGood";
+
+    //删除商品需求
+    public static String DELETE_GOOD = "deleteGood";
 }
