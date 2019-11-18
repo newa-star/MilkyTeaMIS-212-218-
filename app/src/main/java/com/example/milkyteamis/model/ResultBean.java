@@ -11,7 +11,11 @@ public class ResultBean {
         this.data = data;
     }
 
+
+
     public List<Good> getData() {
         return data;
     }
+
+
 }

@@ -19,6 +19,7 @@ import com.example.milkyteamis.R;
 import com.example.milkyteamis.adapter.OrderListViewAdapter;
 import com.example.milkyteamis.model.Good;
 import com.example.milkyteamis.model.ResultBean;
+import com.example.milkyteamis.model.ResultBean2;
 import com.example.milkyteamis.server.ServerAddress;
 import com.example.milkyteamis.view.MyListView;
 import com.google.gson.Gson;
@@ -45,7 +46,7 @@ public class GoodsActivity extends BaseActivity implements View.OnClickListener,
 
     private List<Good> goodlist = new ArrayList<>();
 
-    private List<Good> updateGoodlist = new ArrayList<>();
+    private Good updateGood = new Good();
 
 
     android.support.v7.widget.Toolbar toolbar;
@@ -77,8 +78,8 @@ public class GoodsActivity extends BaseActivity implements View.OnClickListener,
     @Override
     protected void onResume() {
         super.onResume();
+        adapter.notifyDataSetChanged();
         getGoodsList();
-        initListView();
     }
 
     @Override
@@ -165,10 +166,7 @@ public class GoodsActivity extends BaseActivity implements View.OnClickListener,
         dialog.setButton(DialogInterface.BUTTON_POSITIVE, "确认修改", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                if(good.getName() != goodsName.getText().toString())
-                    updateGoodInfo(good.getId(),"goodName",goodsName.getText().toString());
-                if(good.getPrice() != Double.valueOf(goodsPrice.getText().toString()))
-                    updateGoodInfo(good.getId(),"price",goodsPrice.getText().toString());
+                updateGoodInfo(good.getId(),goodsName.getText().toString(),Double.valueOf(goodsPrice.getText().toString()),null);
                 //还有分类和图片
             }
         });
@@ -188,18 +186,20 @@ public class GoodsActivity extends BaseActivity implements View.OnClickListener,
     }
 
     /**
-     * 更新商品信息
-     * @param id  标识商品id
-     * @param type  商品修改的属性
-     * @param value   修改后的新值
+     * 更新商品
+     * @param id 指定的商品的id
+     * @param goodName 修改的商品名
+     * @param price  修改的商品价格
+     * @param picture  修改的商品图片
      */
-    public void updateGoodInfo(int id,String type,String value){
+    public void updateGoodInfo(int id,String goodName,double price,String picture){
         RequestParams paras = new RequestParams();
         JsonObject jsonObject = new JsonObject();
         try{
             jsonObject.addProperty("id",id);
-            jsonObject.addProperty("type",type);
-            jsonObject.addProperty("value",value);
+            jsonObject.addProperty("goodName",goodName);
+            jsonObject.addProperty("price",price);
+            jsonObject.addProperty("picture",picture);
             Gson gson = new Gson();
             paras.setBodyEntity(new StringEntity(gson.toJson(jsonObject),"UTF-8"));
             paras.setContentType("application/json");
@@ -213,10 +213,11 @@ public class GoodsActivity extends BaseActivity implements View.OnClickListener,
             public void onSuccess(ResponseInfo<String> responseInfo) {
                 Log.i("TAG","更新成功-----"+responseInfo.result);
                 Gson gson = new Gson();
-                //ResultBean  resultBean = gson.fromJson(responseInfo.result,ResultBean.class);
-                //updateGoodlist = resultBean.getData();
-                Toast.makeText(GoodsActivity.this,"已成功更新,需要重启刷新页面",Toast.LENGTH_SHORT).show();
-
+                ResultBean2 resultBean = gson.fromJson(responseInfo.result,ResultBean2.class);
+                updateGood = resultBean.getData();
+                Toast.makeText(GoodsActivity.this,"已成功更新为"+updateGood.getName()+",需要重启刷新页面",Toast.LENGTH_SHORT).show();
+                goodlist.set(updateGood.getId()-1,updateGood);
+                initListView();
             }
 
             @Override
@@ -231,7 +232,7 @@ public class GoodsActivity extends BaseActivity implements View.OnClickListener,
      *
      * @param id  删除的商品的id
      */
-    public void deleteGood(int id){
+    public void deleteGood(final int id){
         RequestParams params = new RequestParams();
         JsonObject jsonObject = new JsonObject();
         try{
@@ -249,6 +250,8 @@ public class GoodsActivity extends BaseActivity implements View.OnClickListener,
             public void onSuccess(ResponseInfo<String> responseInfo) {
                 Log.i("TAG","删除成功-------"+responseInfo.result);
                 Toast.makeText(GoodsActivity.this,"已成功删除该商品，需要重启刷新页面",Toast.LENGTH_SHORT).show();
+                goodlist.remove(id-1);
+                initListView();
             }
 
             @Override
