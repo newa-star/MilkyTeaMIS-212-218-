@@ -51,6 +51,8 @@ public class GoodsActivity extends BaseActivity implements View.OnClickListener,
 
     android.support.v7.widget.Toolbar toolbar;
 
+    private ImageView iv_toolbar_back;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -71,6 +73,8 @@ public class GoodsActivity extends BaseActivity implements View.OnClickListener,
                 return true;
             }
         });
+        iv_toolbar_back = findViewById(R.id.iv_toolbar_back);
+        iv_toolbar_back.setVisibility(View.VISIBLE);
         getGoodsList();
         initListView();
     }

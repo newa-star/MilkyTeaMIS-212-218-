@@ -9,13 +9,14 @@ import android.widget.ImageView;
 import com.example.milkyteamis.activity.BaseActivity;
 import com.example.milkyteamis.activity.GoodsActivity;
 import com.example.milkyteamis.activity.OrderActivity;
+import com.example.milkyteamis.activity.OrderInfoActivity;
 
 public class MainActivity extends BaseActivity {
 
     //启动从登陆界面开始
 
     //初始化页面控件
-    ImageView iv_order,iv_report,iv_chpasswd,iv_storage,iv_goods,iv_ordersInfo;
+    ImageView iv_order,iv_report,iv_chpasswd,iv_storage,iv_goods,iv_ordersInfo,iv_toolbar_back;
 
     Toolbar toolbar;
 
@@ -36,6 +37,8 @@ public class MainActivity extends BaseActivity {
         iv_report = findViewById(R.id.iv_report);
         iv_goods = findViewById(R.id.iv_goods);
         iv_ordersInfo = findViewById(R.id.iv_orderInfo);
+        iv_toolbar_back = findViewById(R.id.iv_toolbar_back);
+        iv_toolbar_back.setVisibility(View.INVISIBLE);
     }
 
     private void initListener(){
@@ -57,7 +60,8 @@ public class MainActivity extends BaseActivity {
         iv_ordersInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent i = new Intent(MainActivity.this, OrderInfoActivity.class);
+                startActivity(i);
             }
         });
 

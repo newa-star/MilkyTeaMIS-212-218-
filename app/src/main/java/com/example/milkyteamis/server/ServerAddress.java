@@ -31,4 +31,12 @@ public class ServerAddress {
 
     //删除商品需求
     public static String DELETE_GOOD = "deleteGood";
+
+    //获取图片的FTP协议
+    public static String FTP_IMAGE = "ftp://192.168.137.208/";
+
+    //新增订单
+    public static String ADD_ORDER = "addOrderAndOrderGood";
+
+
 }

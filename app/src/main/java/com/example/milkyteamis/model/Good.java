@@ -2,7 +2,9 @@ package com.example.milkyteamis.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Good {
+import java.io.Serializable;
+
+public class Good implements Serializable {
     //商品名称
     @SerializedName("goodName")
     private String name;
@@ -16,7 +18,7 @@ public class Good {
     @SerializedName("size")
     private int size;
     //商品的图片
-    //private String picture;
+    private String picture;
     //商品的类别（0—奶茶，1-果茶，2-鲜茶，3-芝士）
     @SerializedName("classify")
 
@@ -66,13 +68,13 @@ public class Good {
         this.size = size;
     }
 
- /**   public String getPicture() {
+    public String getPicture() {
         return picture;
     }
 
     public void setPicture(String picture) {
         this.picture = picture;
-    }*/
+    }
 
     public int getClassfication() {
         return classfication;
