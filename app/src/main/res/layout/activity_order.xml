@@ -43,10 +43,10 @@
                     android:gravity="center_vertical"
                     android:hint="请输入关键词..."
                     android:paddingLeft="45dp"
-                    android:inputType="none"
-                    android:clickable="false"
-                    android:focusable="false"
-                    android:focusableInTouchMode="false"
+                    android:inputType="text"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
                     android:singleLine="true"
                     android:textSize="14sp" />
 

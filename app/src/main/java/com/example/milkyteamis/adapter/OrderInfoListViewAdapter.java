@@ -50,7 +50,7 @@ public class OrderInfoListViewAdapter extends BaseAdapter {
         TextView type = BaseViewHolder.get(convertview,R.id.tv_main_list_item_type);
         ImageView image = BaseViewHolder.get(convertview,R.id.iv_main_list_item);
 
-        title.setText("订单"+Integer.toString(ordersInfoList.get(i).getId()));
+        title.setText("订单"+Integer.toString(i+1));
         price.setText("总价："+Double.toString(ordersInfoList.get(i).getTotal_price()));
         type.setText("经手人："+Integer.toString(ordersInfoList.get(i).getSoldUserId()));
         return convertview;

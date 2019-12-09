@@ -1,7 +1,7 @@
 package com.example.milkyteamis.server;
 
 /**
- * 记录后台服务器url & 喜爱那个挂接口url
+ * 记录后台服务器url
  */
 
 public class ServerAddress {
@@ -38,5 +38,13 @@ public class ServerAddress {
     //新增订单
     public static String ADD_ORDER = "addOrderAndOrderGood";
 
+    //搜索商品
+    public static String FIND_GOOD_BY_KEY = "findGoodByKey";
+
+    //登录
+    public static String LOGIN = "login";
+
+    //修改密码
+    public static String UPDATE_PASSWORD = "updatePassword";
 
 }

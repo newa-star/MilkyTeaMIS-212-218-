@@ -2,6 +2,7 @@ package com.example.milkyteamis.activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
@@ -76,6 +78,8 @@ public class OrderActivity extends BaseActivity  implements View.OnClickListener
 
     private EditText etNum;
 
+    private EditText et_main_search;
+
     Toolbar toolbar;
 
 
@@ -113,6 +117,7 @@ public class OrderActivity extends BaseActivity  implements View.OnClickListener
         iv_toolbar_shopcar = findViewById(R.id.iv_toobar_shopcar);
         iv_toolbar_shopcar.setVisibility(View.VISIBLE);
         iv_toolbar_back = findViewById(R.id.iv_toolbar_back);
+        et_main_search = findViewById(R.id.et_main_search);
         iv_toolbar_shopcar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -125,6 +130,15 @@ public class OrderActivity extends BaseActivity  implements View.OnClickListener
             @Override
             public void onClick(View view) {
                 finish();
+            }
+        });
+
+        et_main_search.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                InputMethodManager imm = (InputMethodManager) OrderActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.showSoftInput(OrderActivity.this.getWindow().getDecorView(),InputMethodManager.SHOW_FORCED);
+                searchGoodByKey(et_main_search.getText().toString());
             }
         });
     }
@@ -206,6 +220,48 @@ public class OrderActivity extends BaseActivity  implements View.OnClickListener
             public void onFailure(HttpException e, String s) {
                 System.out.println(s);
                 Toast.makeText(OrderActivity.this,"网络错误",Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    /**
+     *  按照搜索的关键词搜索相关商品
+     * @param key  关键词
+     */
+    public void searchGoodByKey(final String key){
+        RequestParams params = new RequestParams();
+        HttpUtils http = new HttpUtils();
+        try{
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("key",key);
+            Gson gson = new Gson();
+            params.setBodyEntity(new StringEntity(gson.toJson(jsonObject), "UTF-8"));
+            params.setContentType("application/json");
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        http.send(HttpRequest.HttpMethod.POST, ServerAddress.SERVER_ADDRESS + ServerAddress.FIND_GOOD_BY_KEY, params, new RequestCallBack<String>() {
+            @Override
+            public void onSuccess(ResponseInfo<String> responseInfo) {
+                Log.i("TAG","------"+responseInfo.result);
+                Gson gson = new Gson();
+                ResultBean resultBean = gson.fromJson(responseInfo.result,ResultBean.class);
+                if(resultBean.getData().get(0) == null && key != "")
+                    Toast.makeText(OrderActivity.this,"没有找到具有该关键字的商品",Toast.LENGTH_SHORT).show();
+                else {
+                    InputMethodManager imm = (InputMethodManager)OrderActivity.this.getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(OrderActivity.this.getCurrentFocus().getWindowToken(),0);
+                    Toast.makeText(OrderActivity.this,"成功找到以下商品",Toast.LENGTH_SHORT).show();
+                    goodlist = resultBean.getData();
+                    initListView();
+                }
+            }
+
+            @Override
+            public void onFailure(HttpException e, String s) {
+                //if (key != "")
+                    //Toast.makeText(OrderActivity.this,"网络错误",Toast.LENGTH_SHORT).show();
             }
         });
     }

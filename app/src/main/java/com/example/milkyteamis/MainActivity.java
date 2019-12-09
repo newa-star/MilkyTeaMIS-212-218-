@@ -16,7 +16,7 @@ public class MainActivity extends BaseActivity {
     //启动从登陆界面开始
 
     //初始化页面控件
-    ImageView iv_order,iv_report,iv_chpasswd,iv_storage,iv_goods,iv_ordersInfo,iv_toolbar_back;
+    ImageView iv_order,iv_report,iv_chpasswd,iv_goods,iv_ordersInfo,iv_toolbar_back;
 
     Toolbar toolbar;
 
@@ -33,7 +33,6 @@ public class MainActivity extends BaseActivity {
     private void initView(){
         iv_order = findViewById(R.id.iv_order);
         iv_chpasswd = findViewById(R.id.iv_chpasswd);
-        iv_storage = findViewById(R.id.iv_storage);
         iv_report = findViewById(R.id.iv_report);
         iv_goods = findViewById(R.id.iv_goods);
         iv_ordersInfo = findViewById(R.id.iv_orderInfo);
@@ -79,11 +78,5 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-        iv_storage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
     }
 }
