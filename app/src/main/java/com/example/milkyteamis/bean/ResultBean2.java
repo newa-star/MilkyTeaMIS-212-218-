@@ -1,4 +1,6 @@
-package com.example.milkyteamis.model;
+package com.example.milkyteamis.bean;
+
+import com.example.milkyteamis.model.Good;
 
 public class ResultBean2 {
     private int status;

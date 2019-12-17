@@ -1,38 +1,31 @@
 package com.example.milkyteamis.activity;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RadioButton;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.milkyteamis.R;
 import com.example.milkyteamis.adapter.OrderGridViewAdapter;
 import com.example.milkyteamis.adapter.OrderListViewAdapter;
-import com.example.milkyteamis.loader.ImageLoader;
 import com.example.milkyteamis.model.Good;
 import com.example.milkyteamis.model.Order;
 import com.example.milkyteamis.model.Orders;
-import com.example.milkyteamis.model.ResultBean;
+import com.example.milkyteamis.bean.ResultBean;
 import com.example.milkyteamis.server.ServerAddress;
 import com.example.milkyteamis.view.MyGridView;
 import com.example.milkyteamis.view.MyListView;
@@ -47,7 +40,6 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
 
 import org.apache.http.entity.StringEntity;
-import org.json.JSONObject;
 
 import java.io.Serializable;
 import java.lang.reflect.Type;

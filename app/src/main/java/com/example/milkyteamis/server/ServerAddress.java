@@ -47,4 +47,18 @@ public class ServerAddress {
     //修改密码
     public static String UPDATE_PASSWORD = "updatePassword";
 
+    //验证密码
+    public static  String CHECK_PASSWORD = "checkPassword";
+
+    //注册申请
+    public static String REGISTER = "apply";
+
+    //折线图
+    public static String LINE_CHART = "lineChart";
+
+    //条形图
+    public static String BAR_CHART = "barChart";
+
+    //饼图
+    public static String PIE_CHART = "pieChart";
 }

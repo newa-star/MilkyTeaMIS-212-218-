@@ -1,12 +1,14 @@
 package com.example.milkyteamis.model;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     //标识用户的id的编号
     private int id;
     //用户账号
     private String code;
     //用户昵称
-    private String name;
+    private String userName;
     //用户密码
     private String password;
     //用户身份
@@ -15,7 +17,7 @@ public class User {
     public User(int id, String code, String name, String password, int identity) {
         this.id = id;
         this.code = code;
-        this.name = name;
+        this.userName = name;
         this.password = password;
         this.identity = identity;
     }
@@ -41,11 +43,11 @@ public class User {
     }
 
     public String getName() {
-        return name;
+        return userName;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.userName = name;
     }
 
     public String getPassword() {

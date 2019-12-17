@@ -50,7 +50,7 @@
                     android:layout_marginLeft="40dp"
                     android:background="@null"
                     android:hint="账号"
-                    android:inputType="number"
+                    android:inputType="text"
                     android:singleLine="true"
                     android:textColorHint="#999999"
                     android:textSize="18sp" />
@@ -107,21 +107,6 @@
                 android:orientation="horizontal"
                 android:gravity="center"
                 >
-                <CheckBox
-                    android:id="@+id/cb_login_remember"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:checked="false"
-                    android:textSize="14sp" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:layout_gravity="center"
-                    android:text="记住密码"
-                    android:textSize="14sp"
-                    />
             </LinearLayout>
         </LinearLayout>
 
@@ -132,8 +117,20 @@
             android:layout_marginTop="15dp"
             android:background="#FFA500"
             android:text="登录"
+
             android:textColor="#ffffff"
             android:textSize="20sp" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="15dp"
+            android:background="#FFA500"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:text="注册"
+            android:id="@+id/bt_login_register"
+            />
     </LinearLayout>
 
 </LinearLayout>

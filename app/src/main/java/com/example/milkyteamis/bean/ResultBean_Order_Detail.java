@@ -1,4 +1,6 @@
-package com.example.milkyteamis.model;
+package com.example.milkyteamis.bean;
+
+import com.example.milkyteamis.model.Order;
 
 import java.util.List;
 
