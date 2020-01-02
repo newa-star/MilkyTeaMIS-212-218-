@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.milkyteamis.R;
@@ -52,6 +53,11 @@ public class OrderInfoActivity extends BaseActivity implements View.OnClickListe
 
     private List<Order> orderDetailList = new ArrayList<>();
 
+    private TextView orderInfo_id,time,staff;
+
+    private int orderId;
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +65,15 @@ public class OrderInfoActivity extends BaseActivity implements View.OnClickListe
         super.setToolbarAndTitle("订单信息",true);
         toolbar = findViewById(R.id.toolbar);
         iv_toolbar_back = findViewById(R.id.iv_toolbar_back);
+        //time = findViewById(R.id.tv_orderinfo_time);
+        //staff = findViewById(R.id.tv_orderinfo_staff);
         iv_toolbar_back.setVisibility(View.VISIBLE);
+        iv_toolbar_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         getOrderList();
     }
 
@@ -73,6 +87,7 @@ public class OrderInfoActivity extends BaseActivity implements View.OnClickListe
         switch (adapterView.getId()){
             case R.id.mainuser_listview_info:
                 showOrderDetail(orderInfoList.get(i).getId());
+                orderId = orderInfoList.get(i).getId();
         }
     }
 
@@ -145,16 +160,18 @@ public class OrderInfoActivity extends BaseActivity implements View.OnClickListe
         AlertDialog.Builder builder = new AlertDialog.Builder(OrderInfoActivity.this);
         View view = View.inflate(OrderInfoActivity.this,R.layout.alertdialog_orderinfo_detail,null);
         //看看layout文件的view
+        orderInfo_id = view.findViewById(R.id.tv_orderdetail_id);
+        orderInfo_id.setText(Integer.toString(orderId));
         orderDetailListview = view.findViewById(R.id.order_listview_detail);
         adapter_ordee_detail = new OrderDetailListviewAdapter(OrderInfoActivity.this,orderDetailList);
         orderDetailListview.setAdapter(adapter_ordee_detail);
         builder.setTitle("订单详情");
-        AlertDialog dialog = builder.create();
+        final AlertDialog dialog = builder.create();
         dialog.setView(view);
         dialog.setButton(DialogInterface.BUTTON_POSITIVE, "确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-
+                dialog.dismiss();
             }
         });
         dialog.show();

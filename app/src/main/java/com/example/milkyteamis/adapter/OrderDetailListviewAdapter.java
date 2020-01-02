@@ -44,11 +44,11 @@ public class OrderDetailListviewAdapter extends BaseAdapter {
         view = View.inflate(mContext,R.layout.orderinfo_listview_item,null);
         //订单号
         //TextView id = BaseViewHolder.get(view,R.id.tv_orderinfo_id);
-        TextView id = view.findViewById(R.id.tv_orderinfo_id);
+        //TextView id = view.findViewById(R.id.tv_orderinfo_id);
         //下单时间
-        TextView time = BaseViewHolder.get(view,R.id.tv_orderinfo_time);
+        //TextView time = BaseViewHolder.get(view,R.id.tv_orderinfo_time);
         //经手人
-        TextView staff = BaseViewHolder.get(view,R.id.tv_orderinfo_staff);
+       // TextView staff = BaseViewHolder.get(view,R.id.tv_orderinfo_staff);
         //产品名
         TextView goodName = BaseViewHolder.get(view,R.id.tv_orderinfo_goodname);
         //价格
@@ -64,7 +64,7 @@ public class OrderDetailListviewAdapter extends BaseAdapter {
         //加椰果
         TextView coconut = BaseViewHolder.get(view,R.id.tv_orderinfo_coconut);
 
-        id.setText(Integer.toString(orderDetailList.get(i).getOrderId()));
+        //id.setText(Integer.toString(orderDetailList.get(i).getOrderId()));
         //下单时间
         //经手人
         goodName.setText(orderDetailList.get(i).getGoodName());

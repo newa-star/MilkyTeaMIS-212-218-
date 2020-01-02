@@ -71,6 +71,8 @@ public class AddGoodsActivity extends BaseActivity {
     String realPathFromUri;
     ImageView iv_add_picture;
 
+    private ImageView iv_toolbar_back;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,18 +92,28 @@ public class AddGoodsActivity extends BaseActivity {
     private void initView(){
         bt_add_cancle = findViewById(R.id.bt_add_cancle);
         bt_add_confirm = findViewById(R.id.bt_add_confirm);
-        bt_add_picture = findViewById(R.id.bt_add_picture);
         et_add_goodName = findViewById(R.id.et_add_goodname);
         et_add_goodPrice = findViewById(R.id.et_add_goodsprice);
-        iv_add_picture = findViewById(R.id.iv_add_picture);
+        bt_add_picture = findViewById(R.id.bt_add_picture);
         rg_addgood_type = findViewById(R.id.rg_addgood_type);
         rb_addgood_large = findViewById(R.id.rb_addgood_large);
         rb_addgood_mid = findViewById(R.id.rb_addgood_mid);
+        bt_add_picture.setVisibility(View.INVISIBLE);
+        iv_toolbar_back = findViewById(R.id.iv_toolbar_back);
+        iv_toolbar_back.setVisibility(View.VISIBLE);
+        iv_toolbar_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+        /**
         String[] mPermissionList = new String[]{
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.READ_EXTERNAL_STORAGE
         };
         ActivityCompat.requestPermissions(AddGoodsActivity.this, mPermissionList, 100);
+         */
     }
 
     private void initListener(){
@@ -138,14 +150,6 @@ public class AddGoodsActivity extends BaseActivity {
             }
         });
 
-        bt_add_picture.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = getIntent();
-                finish();
-                startActivity(intent);
-            }
-        });
 
         rg_addgood_type.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -201,6 +205,8 @@ public class AddGoodsActivity extends BaseActivity {
     }
 
 
+
+/**
     private void setPhoto() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
             startActivityForResult(new Intent(ACTION_GET_CONTENT).setType("image/*"), REQUEST_PICK_IMAGE);
@@ -210,8 +216,9 @@ public class AddGoodsActivity extends BaseActivity {
             intent.setType("image/*");
             startActivityForResult(intent, REQUEST_PICK_IMAGE);
         }
-    }
+    }*/
 
+/**
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -252,11 +259,11 @@ public class AddGoodsActivity extends BaseActivity {
                     Toast.makeText(this, "请设置必要的权限", Toast.LENGTH_SHORT).show();
                 break;
         }
-    }
+    }*/
 
     /**
      * 根据URI获取图片绝对路径
-     */
+
     public static String getRealPathFromUri(Context context, Uri uri) {
         int sdkVersion = Build.VERSION.SDK_INT;
         if (sdkVersion >= 19) { // api >= 19
@@ -264,7 +271,7 @@ public class AddGoodsActivity extends BaseActivity {
         } else { // api < 19
             return getRealPathFromUriBelowAPI19(context, uri);
         }
-    }
+    }*/
 
     /**
      * 适配api19以下(不包括api19),根据uri获取图片的绝对路径
@@ -272,10 +279,10 @@ public class AddGoodsActivity extends BaseActivity {
      * @param context 上下文对象
      * @param uri     图片的Uri
      * @return 如果Uri对应的图片存在, 那么返回该图片的绝对路径, 否则返回null
-     */
+
     private static String getRealPathFromUriBelowAPI19(Context context, Uri uri) {
         return getDataColumn(context, uri, null, null);
-    }
+    } */
 
     /**
      * 适配api19及以上,根据uri获取图片的绝对路径
@@ -283,7 +290,7 @@ public class AddGoodsActivity extends BaseActivity {
      * @param context 上下文对象
      * @param uri     图片的Uri
      * @return 如果Uri对应的图片存在, 那么返回该图片的绝对路径, 否则返回null
-     */
+
     @SuppressLint("NewApi")
     private static String getRealPathFromUriAboveApi19(Context context, Uri uri) {
         String filePath = null;
@@ -309,13 +316,13 @@ public class AddGoodsActivity extends BaseActivity {
             filePath = uri.getPath();
         }
         return filePath;
-    }
+    }*/
 
     /**
      * 获取数据库表中的 _data 列，即返回Uri对应的文件路径
      *
      * @return
-     */
+
     private static String getDataColumn(Context context, Uri uri, String selection, String[] selectionArgs) {
         String path = null;
 
@@ -333,23 +340,22 @@ public class AddGoodsActivity extends BaseActivity {
             }
         }
         return path;
-    }
+    }*/
 
     /**
      * @param uri the Uri to check
      * @return Whether the Uri authority is MediaProvider
-     */
+
     private static boolean isMediaDocument(Uri uri) {
         return "com.android.providers.media.documents".equals(uri.getAuthority());
-    }
+    }*/
 
     /**
-     * @param uri the Uri to check
      * @return Whether the Uri authority is DownloadsProvider
-     */
+
     private static boolean isDownloadsDocument(Uri uri) {
         return "com.android.providers.downloads.documents".equals(uri.getAuthority());
-    }
+    }*/
 
 
     class SpinnerSelectedListener implements AdapterView.OnItemSelectedListener {

@@ -82,6 +82,44 @@ public class MainActivity extends BaseActivity {
             }
         });
 
+        iv_ordersInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(user.getIdentity() == 0){
+                Intent i = new Intent(MainActivity.this, OrderInfoActivity.class);
+                startActivity(i);
+                }
+                else if(user.getIdentity() == 1){
+                    Toast.makeText(MainActivity.this,"对不起，当前用户没有权限访问此项功能",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        iv_goods.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (user.getIdentity() == 0) {
+                    Intent i = new Intent(MainActivity.this, GoodsActivity.class);
+                    startActivity(i);
+                }
+                else if(user.getIdentity() == 1){
+                    Toast.makeText(MainActivity.this,"对不起，当前用户没有权限访问此项功能",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        iv_report.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(user.getIdentity() == 0) {
+                    Intent intent = new Intent(MainActivity.this, ReportActivity.class);
+                    startActivity(intent);
+                }
+                else if (user.getIdentity() == 1){
+                    Toast.makeText(MainActivity.this,"对不起，当前用户没有权限访问此项功能",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
         iv_chpasswd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -121,29 +159,6 @@ public class MainActivity extends BaseActivity {
                 catch (Exception e){
                     e.printStackTrace();
                 }
-            }
-        });
-
-        iv_ordersInfo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, OrderInfoActivity.class);
-                startActivity(i);
-            }
-        });
-
-        iv_goods.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, GoodsActivity.class);
-                startActivity(i);
-            }
-        });
-        iv_report.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, ReportActivity.class);
-                startActivity(intent);
             }
         });
     }

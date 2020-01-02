@@ -12,6 +12,8 @@ public class Order implements Serializable {
     private int goodId;
     //商品名称
     private String goodName;
+    //商品类别（0—奶茶，1-果茶，2-鲜茶，3-芝士）
+    private int type;
     //标识温度 0-正常冰，1-去冰，2-常温，3-加热
     private int temperature;
     //标识甜度 0-正常糖，1-五分糖，2-无糖
@@ -25,11 +27,12 @@ public class Order implements Serializable {
     //标识是否加椰果 0-不加椰果，1-加椰果
     private int if_add_coconuts;
 
-    public Order(int id, int orderId, int goodId, String goodName, int temperature, int sugar, int soldNum, double realPrice, int if_add_pearl, int if_add_coconuts) {
+    public Order(int id, int orderId, int goodId, String goodName,int type, int temperature, int sugar, int soldNum, double realPrice, int if_add_pearl, int if_add_coconuts) {
         this.id = id;
         this.orderId = orderId;
         this.goodId = goodId;
         this.goodName = goodName;
+        this.type = type;
         this.temperature = temperature;
         this.sugar = sugar;
         this.sum = soldNum;
@@ -39,7 +42,7 @@ public class Order implements Serializable {
     }
 
     public Order() {
-        this(0,0,0,"",0,0,0,0,0,0);
+        this(0,0,0,"",0,0,0,0,0,0,0);
     }
 
     public int getId() {
@@ -120,5 +123,13 @@ public class Order implements Serializable {
 
     public void setIf_add_coconuts(int if_add_coconuts) {
         this.if_add_coconuts = if_add_coconuts;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 }
