@@ -1,6 +1,8 @@
 package com.example.milkyteamis.activity;
 
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -52,6 +54,7 @@ public class GoodsActivity extends BaseActivity implements View.OnClickListener,
 
     private ImageView iv_toolbar_back;
 
+    private TextView tv_toolbar_title;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,7 +62,7 @@ public class GoodsActivity extends BaseActivity implements View.OnClickListener,
         setContentView(R.layout.activity_goods);
         super.setToolbarAndTitle("商品列表",true);
         toolbar = findViewById(R.id.toolbar);
-        toolbar.setPadding(0, getStatusBarHeight(), 0, 0);
+        //toolbar.setPadding(0, getStatusBarHeight(), 0, 0);
         toolbar.requestLayout();
         toolbar.inflateMenu(R.menu.menu_good_insert);
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
@@ -67,29 +70,48 @@ public class GoodsActivity extends BaseActivity implements View.OnClickListener,
             public boolean onMenuItemClick(MenuItem menuItem) {
                 if(menuItem.getItemId() == R.id.menu_new){
                     Intent intent = new Intent(GoodsActivity.this,AddGoodsActivity.class);
-                    startActivity(intent);
+                    startActivityForResult(intent,1);
                 }
                 return true;
             }
         });
         iv_toolbar_back = findViewById(R.id.iv_toolbar_back);
         iv_toolbar_back.setVisibility(View.VISIBLE);
+        iv_toolbar_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+        tv_toolbar_title = findViewById(R.id.tv_toolbar_title);
+        tv_toolbar_title.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getGoodsList();
+                initListView();
+            }
+        });
         getGoodsList();
         initListView();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        adapter.notifyDataSetChanged();
-        getGoodsList();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        getGoodsList();
+        //unregisterReceiver(mRefreshBroadcastReceiver);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         initListView();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        initListView();
+        System.out.println("yes");
     }
 
     @Override
@@ -253,7 +275,7 @@ public class GoodsActivity extends BaseActivity implements View.OnClickListener,
             public void onSuccess(ResponseInfo<String> responseInfo) {
                 Log.i("TAG","删除成功-------"+responseInfo.result);
                 Toast.makeText(GoodsActivity.this,"已成功删除该商品，需要重启刷新页面",Toast.LENGTH_SHORT).show();
-                goodlist.remove(id-1);
+                getGoodsList();
                 initListView();
             }
 

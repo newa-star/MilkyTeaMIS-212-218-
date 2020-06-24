@@ -362,6 +362,7 @@ public class OrderActivity extends BaseActivity  implements View.OnClickListener
                 //订单详情条目信息
                 order_good.setGoodId(good.getId());
                 order_good.setGoodName(good.getName());
+                order_good.setType(good.getClassfication());
                 order_good.setSoldNum(Integer.valueOf(etNum.getText().toString().trim()));
                 order_good.setRealPrice(good.getPrice());
                 order_good.setTemperature(temperature_detail);

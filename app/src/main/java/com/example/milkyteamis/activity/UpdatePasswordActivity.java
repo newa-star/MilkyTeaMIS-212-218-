@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +35,9 @@ public class UpdatePasswordActivity extends BaseActivity {
     private  EditText et_changeuserinfo_confirmnew;
 
     private Button bt_changeuserinfo_sure;
+
+    private ImageView iv_toolbar_back;
+
     private User loginUser;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,6 +45,14 @@ public class UpdatePasswordActivity extends BaseActivity {
         setContentView(R.layout.activity_changepasswd);
         loginUser = (User)getIntent().getSerializableExtra("loginUser");
         super.setToolbarAndTitle("修改密码",true);
+        iv_toolbar_back = findViewById(R.id.iv_toolbar_back);
+        iv_toolbar_back.setVisibility(View.VISIBLE);
+        iv_toolbar_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         initView();
     }
     private void initView(){

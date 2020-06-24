@@ -193,6 +193,14 @@ public class ShopCarActivity extends BaseActivity implements AdapterView.OnItemC
         final RadioButton rb_good_ice_heat = view.findViewById(R.id.rb_good_ice_heat);
         goodsName.setText(orderGood.getGoodName());
         goodsPrice.setText(Double.toString(orderGood.getRealPrice()));
+        if(orderGood.getType() == 0)
+            goodsType.setText("奶茶");
+        else if(orderGood.getType() == 1)
+            goodsType.setText("果茶");
+        else if(orderGood.getType() == 2)
+            goodsType.setText("鲜茶");
+        else if(orderGood.getType() == 3)
+            goodsType.setText("芝士");
         //椰果设置
         if(orderGood.getIf_add_coconuts() == 1)
             rb_good_coconuts.setChecked(true);

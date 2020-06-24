@@ -5,75 +5,7 @@
     android:background="@drawable/shape_border"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="20dp"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="订单号 ："
-            android:textSize="24dp"
-            android:textColor="#FFDEAD"
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="1"
-            android:textSize="24dp"
-            android:textColor="#FFDEAD"
-            android:id="@+id/tv_orderinfo_id"
-            />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="20dp"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="下单时间 ："
-            android:textSize="24dp"
-            android:textColor="#FFDEAD"
 
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="1"
-            android:textSize="24dp"
-            android:textColor="#FFDEAD"
-            android:id="@+id/tv_orderinfo_time"
-            />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="20dp"
-
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="经手人 ："
-            android:textSize="24dp"
-            android:textColor="#FFDEAD"
-
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="1"
-            android:textSize="24dp"
-            android:textColor="#FFDEAD"
-            android:id="@+id/tv_orderinfo_staff"
-            />
-    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -85,14 +17,12 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="商品名 ："
-            android:textColor="#FFDEAD"
             android:textSize="16dp"
             />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="1"
-            android:textColor="#FFDEAD"
             android:paddingLeft="10dp"
             android:id="@+id/tv_orderinfo_goodname"
             android:textSize="16dp"
@@ -109,7 +39,6 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="价格 ："
-            android:textColor="#FFDEAD"
             android:textSize="16dp"
             />
         <TextView
@@ -117,7 +46,6 @@
             android:layout_height="match_parent"
             android:text="1"
             android:paddingLeft="10dp"
-            android:textColor="#FFDEAD"
             android:id="@+id/tv_orderinfo_price"
             android:textSize="16dp"
             />
@@ -133,14 +61,12 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="数量 ："
-            android:textColor="#FFDEAD"
             android:textSize="16dp"
             />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="1"
-            android:textColor="#FFDEAD"
             android:id="@+id/tv_orderinfo_num"
             android:paddingLeft="10dp"
             android:textSize="16dp"
@@ -158,7 +84,6 @@
             android:layout_height="match_parent"
             android:text="温度 ："
             android:textSize="16dp"
-            android:textColor="#FFDEAD"
             />
         <TextView
             android:layout_width="match_parent"
@@ -167,7 +92,6 @@
             android:id="@+id/tv_orderinfo_tem"
             android:paddingLeft="10dp"
             android:textSize="16dp"
-            android:textColor="#FFDEAD"
             />
     </LinearLayout>
     <LinearLayout
@@ -181,7 +105,6 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="甜度 ："
-            android:textColor="#FFDEAD"
             android:textSize="16dp"
             />
         <TextView
@@ -190,7 +113,6 @@
             android:text="1"
             android:id="@+id/tv_orderinfo_sugar"
             android:paddingLeft="10dp"
-            android:textColor="#FFDEAD"
             android:textSize="16dp"
             />
     </LinearLayout>
@@ -206,7 +128,6 @@
             android:layout_height="match_parent"
             android:text="加珍珠 ："
             android:textSize="16dp"
-            android:textColor="#FFDEAD"
             />
         <TextView
             android:layout_width="match_parent"
@@ -215,7 +136,6 @@
             android:id="@+id/tv_orderinfo_pearl"
             android:paddingLeft="10dp"
             android:textSize="16dp"
-            android:textColor="#FFDEAD"
 
             />
     </LinearLayout>
@@ -231,7 +151,6 @@
             android:layout_height="match_parent"
             android:text="加椰果 ："
             android:textSize="16dp"
-            android:textColor="#FFDEAD"
             />
         <TextView
             android:layout_width="match_parent"
@@ -240,8 +159,6 @@
             android:id="@+id/tv_orderinfo_coconut"
             android:paddingLeft="10dp"
             android:textSize="16dp"
-            android:textColor="#FFDEAD"
-
             />
     </LinearLayout>
 </LinearLayout>

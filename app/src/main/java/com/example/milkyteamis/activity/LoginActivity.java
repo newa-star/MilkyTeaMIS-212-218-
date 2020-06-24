@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.milkyteamis.MainActivity;
@@ -35,11 +36,16 @@ public class LoginActivity extends BaseActivity {
 
     private Button bt_login_login,bt_login_register;
 
+    private ImageView iv_toolbar_back;
+
     private User loginUser;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        super.setToolbarAndTitle("登陆",true);
+        iv_toolbar_back = findViewById(R.id.iv_toolbar_back);
+        iv_toolbar_back.setVisibility(View.INVISIBLE);
         initView();
     }
 
